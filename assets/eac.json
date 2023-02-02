@@ -9,7 +9,7 @@
         "PathRegex": "/.*"
       },
       "LowCodeUnit": {
-        "Package": "fork|github://fathym-it/public-web-docusaurus",
+        "SourceControlLookup": "fork|github://fathym-it/public-web-docusaurus",
         "Version": "latest",
         "Path": "lcu-github-artifacts-release.yml",
         "Type": "GitHub"
@@ -51,6 +51,7 @@
           "MainBranch": "main",
           "Organization": "fathym-it",
           "Repository": "public-web-docusaurus",
+          "Name": "github://fathym-it/public-web-docusaurus",
           "Type": "GitHub"
         }
       }

@@ -1,0 +1,77 @@
+{
+  "Applications": {
+    "{{$1}}-public-web-docusaurus": {
+      "Details": {
+        "Description": "A basic starting point for sites and documentation built with Docusaurus.",
+        "Name": "Docusaurus - Documentation - Forked Recipe"
+      },
+      "LookupConfig": {
+        "PathRegex": "/.*"
+      },
+      "Package": {
+        "Details": {
+          "Build": "latest",
+          "Path": "lcu-github-artifacts-release.yml"
+        },
+        "SourceControlLookup": "github://{{ORGANIZATION}}/public-web-docusaurus",
+        "Type": "GitHubLowCodeUnit"
+      },
+      "Processor": {
+        "Details": {
+          "BaseHref": "/",
+          "DefaultFile": "index.html"
+        },
+        "Type": "DFSProcessor"
+      }
+    }
+  },
+  "Environments": {
+    "{{EaC.PrimaryEnvironment}}": {
+      "Artifacts": {
+        "docusaurus-build-release": {
+          "Type": "GitHubArtifact",
+          "Details": {
+            "Name": "Docusaurus Build/Release",
+            "Output": "./build",
+            "BuildCommand": "npm run build",
+            "InstallCommand": "npm ci",
+            "NPMRegistry": "https://registry.npmjs.org/"
+          }
+        }
+      },
+      "DevOpsActions": {
+        "github-artifacts-release-docusaurus": {
+          "ArtifactLookups": ["docusaurus-build-release"],
+          "Details": {
+            "Name": "GitHub Artifacts - Release - Docusaurus",
+            "Path": "lcu-github-artifacts-release.yml",
+            "Templates": [
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/github/actions/artifacts/_header.hbs.yml",
+              "https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/github/actions/artifacts/release-flow.yml"
+            ]
+          }
+        }
+      },
+      "Sources": {
+        "fork|github://fathym-it/public-web-docusaurus": {
+          "DevOpsActionTriggerLookups": ["github-artifacts-release-docusaurus"],
+          "Details": {
+            "Branches": ["main"],
+            "MainBranch": "main",
+            "Organization": "{{ORGANIZATION}}",
+            "Repository": "public-web-docusaurus",
+            "Name": "github://{{ORGANIZATION}}/public-web-docusaurus"
+          },
+          "Type": "GitHubSourceControl"
+        }
+      }
+    }
+  },
+  "Projects": {
+    "{{PROJECT_LOOKUP}}": {
+      "ApplicationLookups": [
+        "{{$1}}-public-web-docusaurus"
+      ]
+    }
+  }
+}

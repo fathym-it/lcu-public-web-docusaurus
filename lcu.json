@@ -3,7 +3,19 @@
     "Name": "Docusaurus - Documentation - Forked Recipe",
     "Description": "A customizable starter for writing docs and blogs with Markdown/MDX.",
     "Image": "https://www.fathym.com/img/docusaurus.png",
-    "PreviewImage": "https://docusaurus.io/img/docusaurus.svg",
-    "UsesGit": true
+    "PreviewImage": "https://docusaurus.io/img/docusaurus.svg"
+  },
+  "Configurations": {
+    "Full": {
+      "Name": "Docusaurus Quickstart",
+      "Description": "Docusaurus Quickstart",
+      "Phases": [
+        {
+          "Name": "Setup Docusaurus",
+          "Order": 1,
+          "Asset": "docusaurus"
+        }
+      ]
+    }
   }
 }
